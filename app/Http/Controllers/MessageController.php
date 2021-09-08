@@ -16,10 +16,10 @@ class MessageController extends Controller
      */
     public function index()
     {
-
+        $user = Auth::user();
         $messages = Auth::user()->messages()->paginate(5);
 
-        return view('message.index', compact('messages'));
+        return view('message.index', compact('messages','user'));
 
     }
 
@@ -30,8 +30,8 @@ class MessageController extends Controller
      */
     public function create()
     {
-
-        return view('message.create');
+        $user = Auth::user();
+        return view('message.create',compact('user'));
     }
 
     /**

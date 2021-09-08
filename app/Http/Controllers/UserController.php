@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     public function create (){
-
-        return view('user.create');
+        $user = Auth::user();
+        return view('user.create',compact('user'));
     }
     public function store (Request $request){
         $request->validate([
@@ -41,7 +41,7 @@ class UserController extends Controller
             'email'=>$request->email,
             'password'=>$request->password,])){
             session()->flash('success', 'Вы успешно авторизовались');
-            return redirect()->home();
+            return redirect('/home');
         }
         return redirect()->back()->with('error','incorrect login or password');
     }

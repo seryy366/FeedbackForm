@@ -18,15 +18,16 @@ Route::group(['middleware'=>'verified'],function (){
     Route::resource('/message',\App\Http\Controllers\MessageController::class);
 });
 
-Route::get('/', function () {
-    return view('index');
-})->name('home');
+
 
 Route::group(['middleware'=>'guest'],function (){
     Route::get('/register', [\App\Http\Controllers\UserController::class,'create'])->name('register.create');
     Route::post('/register', [\App\Http\Controllers\UserController::class,'store'])->name('register.store');
     Route::get('/login', [\App\Http\Controllers\UserController::class, 'loginForm'])->name('login.create');
     Route::post('/login', [\App\Http\Controllers\UserController::class, 'login'])->name('login');
+    Route::get('/', function () {
+        return view('index');
+    })->name('home');
 });
 
 //    ->middleware('auth');
@@ -44,7 +45,7 @@ Route::get('/email/verify', function () {
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
 
-    return redirect('/');
+    return redirect('/home');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 use Illuminate\Http\Request;
 
