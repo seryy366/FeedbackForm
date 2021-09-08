@@ -51,7 +51,11 @@
                     <img src="{{ asset('assets/front/img/avatar.png') }}" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">{{Auth::user()->name}}</a>
+                    @if (!empty($Auth::user()))
+                        <a href="#" class="d-block">{{Auth::user()->name}}</a>
+                    @elseif()
+                        <a href="#" class="d-block">Гость</a>
+                    @endif
                 </div>
             </div>
 
