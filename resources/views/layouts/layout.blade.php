@@ -31,12 +31,22 @@
         <ul class="navbar-nav ml-auto">
             <!-- Messages Dropdown Menu -->
 
-            <li class="nav-item">
-                <a class="nav-link" data-slide="true" href="{{route('logout')}}" role="button">
-                    <i class="fa fa-share"></i>
+            @if (!empty($user))
+                <li class="nav-item">
+                    <a class="nav-link" data-slide="true" href="{{route('logout')}}" role="button">
+                        <i class="fa fa-share"></i>
 
-                </a>
-            </li>
+
+                    </a>
+                </li>
+            @else
+                <li class="nav-item">
+
+                    <a class="nav-link" data-slide="true" href="{{route('register.create')}}" role="button">
+                        <button class="">Зарегистрироваться</button>
+                    </a>
+                </li>
+            @endif
         </ul>
     </nav>
     <!-- /.navbar -->
@@ -51,9 +61,9 @@
                     <img src="{{ asset('assets/front/img/avatar.png') }}" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    @if (!empty($Auth::user()))
+                    @if (!empty($user))
                         <a href="#" class="d-block">{{Auth::user()->name}}</a>
-                    @elseif()
+                    @else
                         <a href="#" class="d-block">Гость</a>
                     @endif
                 </div>
